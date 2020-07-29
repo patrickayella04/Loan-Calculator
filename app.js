@@ -1,8 +1,24 @@
 // List for submit
-document.getElementById('loan-form').addEventListener('submit', calculateResults);
+document.getElementById('loan-form').addEventListener('submit', function (e) {
+    // show loader
+    const loader = document.getElementById('loading');
+    loader.style.display = 'block';
+
+    setTimeout(clearLoader, 2000)
+
+    e.preventDefault();
+});
+
+function clearLoader(){
+    document.getElementById('loading').remove();
+    document.getElementById('results').style.display = 'block';
+    calculateResults();
+}
+
+// Anding spining loading disc & remove both results and loading gif disc from user view ----  Here we replace calculateResults() function from eventListener and use an anonomous function. We also remove the (e) and e.default as calculateResults() is no longer an event handler.
 
 // Calculate Results
-function calculateResults(e) {
+function calculateResults() { 
 
     console.log('Calculating...');
     // UI vars
@@ -37,7 +53,7 @@ function calculateResults(e) {
 
     }
 
-    e.preventDefault(); // since its a event parameter we prevent default
+    // e.preventDefault(); // since its a event parameter we prevent default
 };
 
 function showError(error) {
@@ -55,7 +71,7 @@ function showError(error) {
     errorDiv.appendChild(document.createTextNode(error));
 
     // 5. Insert error
-    card.insertBefore(errorDiv, heading);// call inertBefore on a parent element, then you pass in what new element you want o put in which is the errorDiv, and you also put what element you want to intsert the errorDiv in before which is this case is the heading.
+    card.insertBefore(errorDiv, heading);// call insertBefore on a parent element, then you pass in what new element you want to put in which is the errorDiv, and you also put what element you want to intsert the errorDiv in before which is this case is the heading.
 
     // 6. Clear error after 3 seconds - window object in javaScript call setTimeout() which takes in two parameters(1. is a function(or a named function) and 2. the time in miliseconds, thousand miliseconds is 1 sec ), we can have something happen after a set amount of seconds.
 
