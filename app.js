@@ -11,7 +11,7 @@ document.getElementById('loan-form').addEventListener('submit', function (e) {
 
 function clearLoader(){
     document.getElementById('loading').remove();
-    document.getElementById('results').style.display = 'block';
+    
     calculateResults();
 }
 
@@ -44,6 +44,8 @@ function calculateResults() {
         totalPayment.value = (monthly * calculatedPayemnts).toFixed(2);
         totalInterest.value = ((monthly * calculatedPayemnts) - principal).toFixed(2);
 
+        document.getElementById('results').style.display = 'block';
+
     } else {
         // console.log('Please check your numbers');
         // Here we build alert message if user inputs invalid information. We will use the CreatElement method from DOM and build/inject the alert from javaScript into the DOM, rather than hard coding it into the DOM, and hiding and showing it. We will build a custom function: 
@@ -59,6 +61,12 @@ function calculateResults() {
 function showError(error) {
     //1.create a div
     const errorDiv = document.createElement('div');
+
+    // Hide results
+    document.getElementById('results').style.display = 'none';
+
+    // Hide loader
+
 
     // 4. Get elements of where we want to put our error
     const card = document.querySelector('.card');
